@@ -1,0 +1,76 @@
+{
+    "name": "vscode-variable-explorer",
+    "displayName": "vscode-variable-explorer",
+    "description": "Simple variable explorer for interactive Python sessions",
+    "version": "0.0.1",
+    "publisher": "dubravsky",
+    "engines": {
+        "vscode": "^1.25.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:sendSelection",
+        "onCommand:sendFile",
+        "onCommand:refresh"
+    ],
+    "main": "./out/extension",
+    "contributes": {
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "variable-explorer",
+                    "title": "Variable Explorer",
+                    "icon": "resources/icons8-menu.svg"
+                }
+            ]
+        },
+        "views": {
+            "variable-explorer": [
+                {
+                    "id": "variables",
+                    "name": "Session variables"
+                }
+            ]
+        },
+        "menus": {
+            "view/title": [
+                {
+					"command": "refresh",
+					"when": "view == variable-explorer",
+					"group": "navigation"
+				}
+            ]
+        },
+        "commands": [
+            {
+                "command": "sendSelection",
+                "title": "Variable Explorer: Send selection to Jupyter console"
+            },
+            {
+                "command": "sendFile",
+                "title": "Variable Explorer: Run file in Jupyter console"
+            },
+            {
+                "command": "refresh",
+                "title": "Variable Explorer: Refresh",
+                "icon": "resources/refresh.svg"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.6",
+        "tslint": "^5.8.0",
+        "@types/node": "^7.0.43",
+        "@types/mocha": "^2.2.42"
+    }
+}
